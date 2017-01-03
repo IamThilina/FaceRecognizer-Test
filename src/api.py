@@ -24,25 +24,19 @@ def api_match():
 
 @app.route('/post/test', methods = ['POST'])
 def api_post_test():
-    print ("#################")
-    print (request)
     print ("#########")
     print (request.data)
-   # print request.json
     print ("#########")
     print (request.is_json)
     print ("#########")
     print (request.json)
-    #print ("##################")
+    print ("##################")
     data = json.loads(request.data)
-    #print (data)
     print (data["foo"])
     return jsonify(request.data)
 
 @app.route('/test/government/data', methods = ['POST'])
 def api_test_government_data():
-    #print "#################"
-    #print request
     profiles = request.json
     response = {}
     response['government'] = profiles['government']['Everything'][0]
@@ -51,20 +45,12 @@ def api_test_government_data():
 
 @app.route('/test/socialmedia/data', methods = ['POST'])
 def api_test_socialmedia_data():
-    #print "#################"
-    #print request
-    #print "#############"
-    profiles = request.data
-    #print request.get_data()
-    #print "#########"
-    #print request.get_json()
-    #print "##################"
     response = {}
-    #print profiles
-    #response['social'] = profiles['socialMedia']['mergedSocialMediaAccounts'][0]
+    profiles = request.json
+    response['social'] = profiles['socialMedia']['mergedSocialMediaAccounts'][0]
     #response['mergedSocialMediaAccounts'] = faceRecognizer.mergeGovernmentAndSocialMediaProfiles(profiles.socialMedia, profiles.government)
-    #return jsonify(response)
-    return 'ok'
+    return jsonify(response)
+    #return 'ok'
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0',port=4000)
