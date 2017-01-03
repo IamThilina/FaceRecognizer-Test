@@ -1,6 +1,4 @@
 from flask import Flask, url_for,jsonify,request
-#from __future__ import print_function
-#import sys
 import json
 import faceRecognizer
 
@@ -37,20 +35,27 @@ def api_post_test():
 
 @app.route('/test/government/data', methods = ['POST'])
 def api_test_government_data():
-    profiles = request.json
     response = {}
-    response['government'] = profiles['government']['Everything'][0]
-    #response['mergedSocialMediaAccounts'] = faceRecognizer.mergeGovernmentAndSocialMediaProfiles(profiles.socialMedia, profiles.government)
+    profiles = request.json
+    governmentProfiles = json.loads(profiles["government"])
+    response['government'] = governmentProfiles['Everything']
     return jsonify(response)
 
 @app.route('/test/socialmedia/data', methods = ['POST'])
 def api_test_socialmedia_data():
     response = {}
     profiles = request.json
-    response['social'] = profiles['socialMedia']['mergedSocialMediaAccounts'][0]
-    #response['mergedSocialMediaAccounts'] = faceRecognizer.mergeGovernmentAndSocialMediaProfiles(profiles.socialMedia, profiles.government)
+    socialMediaProfiles = json.loads(profiles["socialMedia"])
     return jsonify(response)
-    #return 'ok'
+
+@app.route('/facerecognizer/merge', methods = ['POST'])
+def api_facerecognizer_merge():
+    response = {}
+    profiles = request.json
+    socialMediaProfiles = json.loads(profiles["socialMedia"])
+    governmentProfiles = json.loads(profiles["government"])
+    response['profiles'] = faceRecognizer.mergeGovernmentAndSocialMediaProfiles(socialMediaProfiles["mergedSocialMediaAccounts"] ,governmentProfiles["Everything"])
+    return jsonify(response)
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0',port=4000)
