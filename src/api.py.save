@@ -1,7 +1,6 @@
 from flask import Flask, url_for,jsonify,request
 #from __future__ import print_function
 #import sys
-import json
 import faceRecognizer
 
 app = Flask(__name__)
@@ -26,18 +25,18 @@ def api_match():
 def api_post_test():
     print ("#################")
     print (request)
-    print ("#########")
-    print (request.data)
+   # print ("#########")
+   # print (request.mimetype)
    # print request.json
     print ("#########")
     print (request.is_json)
     print ("#########")
-    print (request.json)
-    #print ("##################")
-    data = json.loads(request.data)
-    #print (data)
-    print (data["foo"])
-    return jsonify(request.data)
+    request.on_json_loading_failed = print()
+    print ("#########")    
+    print (request.get_json())
+    print ("#########")   
+    print ("##################")
+    return "OK"
 
 @app.route('/test/government/data', methods = ['POST'])
 def api_test_government_data():
