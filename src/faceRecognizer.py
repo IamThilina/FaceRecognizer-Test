@@ -9,9 +9,9 @@ from PIL import Image
 IMAGE_SIZE = 100 # image size of training and testing data
 DISPLAY_IMAGE_SIZE = 100 # image size of displaying windows
 ORIGINAL_IMAGE_RESIZE = 500 # resize original images to this size
-GOV_MIN_FACE_SIZE = 1000 # minimum object size for government images
-SOCIAL_MEDIA_MIN_FACE_SIZE = 100 # minimum object size for social media images
-
+GOV_MIN_FACE_SIZE = 300 # minimum object size for government images
+SOCIAL_MEDIA_MIN_FACE_SIZE = 80 # minimum object size for social media images
+    
 # Path to the DataSets
 socialMediaDataSetPath = '../resources/social_media_faces'
 governmentDataSetPath = '../resources/government_faces'
@@ -47,7 +47,9 @@ def detectGovernmentFaces(profileList):
     for profile in profileList:
 
         # Read the image and convert to grayscale
-        URL = profile['nic']['picture']
+        URL = profile["NIC data"]["picture"]
+        print ('###############')
+        print (URL)
         image_path = cStringIO.StringIO(urllib.urlopen(URL).read())
         image_pil = Image.open(image_path).convert('L')
         # Convert the image format into numpy array
@@ -84,7 +86,10 @@ def mergeGovernmentAndSocialMediaProfiles(socialMediaProfileList, governmentProf
     #image_paths = [os.path.join(socialMediaDataSetPath, f) for f in os.listdir(socialMediaDataSetPath)]
     count = 0
     for socialMediaProfile in socialMediaProfileList:
-        URL = socialMediaProfile['facebook']['profilePicture']
+       # print socialMediaProfile['facebook'][""]
+        URL = socialMediaProfile["facebook"]["profile_picture"]
+        #print URL
+        #print '#####################'
         image_path = cStringIO.StringIO(urllib.urlopen(URL).read())
         social_media_image_pil = Image.open(image_path).convert('L')
         social_media_image = np.array(social_media_image_pil, 'uint8')
