@@ -9,8 +9,8 @@ from PIL import Image
 IMAGE_SIZE = 100 # image size of training and testing data
 DISPLAY_IMAGE_SIZE = 100 # image size of displaying windows
 ORIGINAL_IMAGE_RESIZE = 500 # resize original images to this size
-GOV_MIN_FACE_SIZE = 1000 # minimum object size for government images
-SOCIAL_MEDIA_MIN_FACE_SIZE = 100 # minimum object size for social media images
+GOV_MIN_FACE_SIZE = 300 # minimum object size for government images
+SOCIAL_MEDIA_MIN_FACE_SIZE = 80 # minimum object size for social media images
 
 # Path to the DataSets
 socialMediaDataSetPath = '../resources/social_media_faces'
