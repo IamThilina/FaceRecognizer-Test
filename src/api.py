@@ -54,8 +54,12 @@ def api_facerecognizer_merge():
     profiles = request.json
     socialMediaProfiles = json.loads(profiles["socialMedia"])
     governmentProfiles = json.loads(profiles["government"])
-    response['profiles'] = faceRecognizer.mergeGovernmentAndSocialMediaProfiles(socialMediaProfiles["mergedSocialMediaAccounts"] ,governmentProfiles["Everything"])
+    #response['profiles'] = faceRecognizer.mergeGovernmentAndSocialMediaProfiles(socialMediaProfiles["mergedSocialMediaAccounts"] ,governmentProfiles["Everything"][:3])
+    response['govPicture'] =  governmentProfiles["Everything"][:3]
+    #response['socialPicture'] = socialMediaProfiles["mergedSocialMediaAccounts"]
     return jsonify(response)
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0',port=4000)
+
+
