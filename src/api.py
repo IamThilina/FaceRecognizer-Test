@@ -33,12 +33,12 @@ def api_post_test():
     print (data["foo"])
     return jsonify(request.data)
 
-@app.route('/test/government/data', methods = ['POST'])
+@app.route('/test/gov test/data', methods = ['POST'])
 def api_test_government_data():
     response = {}
     profiles = request.json
-    governmentProfiles = json.loads(profiles["government"])
-    response['government'] = governmentProfiles['Everything']
+    governmentProfiles = json.loads(profiles["gov test"])
+    response['gov test'] = governmentProfiles['Everything']
     return jsonify(response)
 
 @app.route('/test/socialmedia/data', methods = ['POST'])
@@ -53,7 +53,7 @@ def api_facerecognizer_merge():
     response = {}
     profiles = request.json
     socialMediaProfiles = json.loads(profiles["socialMedia"])
-    governmentProfiles = json.loads(profiles["government"])
+    governmentProfiles = json.loads(profiles["gov test"])
     response['profiles'] = faceRecognizer.mergeGovernmentAndSocialMediaProfiles(socialMediaProfiles["mergedSocialMediaAccounts"] ,governmentProfiles["Everything"][:3])
     #response['govPicture'] =  governmentProfiles["Everything"][:3]
     #response['socialPicture'] = socialMediaProfiles["mergedSocialMediaAccounts"]
