@@ -10,7 +10,7 @@ IMAGE_SIZE = 100 # image size of training and testing data
 DISPLAY_IMAGE_SIZE = 150 # image size of displaying windows
 ORIGINAL_IMAGE_RESIZE = 500 # resize original images to this size
 GOV_MIN_FACE_SIZE = 120 # minimum object size for gov test images
-SOCIAL_MEDIA_MIN_FACE_SIZE = 100 # minimum object size for social test media images
+SOCIAL_MEDIA_MIN_FACE_SIZE = 162 # minimum object size for social test media images
 
 # Path to the DataSets
 socialMediaDataSetPath = '../resources/social/chamil'
